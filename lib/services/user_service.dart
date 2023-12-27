@@ -19,7 +19,7 @@ static Future<User?> getUser(String userId) async {
           await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
       if (snapshot.exists) {
-        return User.fromJson(snapshot.data());
+        //return User.fromJson(snapshot.data());
       } else {
         print('Document does not exist');
         return null;

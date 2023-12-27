@@ -46,7 +46,7 @@ class _UserServiceTestState extends State<UserServiceTest> {
                 final user = User(
                   username: controllerUsername.text,
                   email: controllerEmail.text,
-                  registrationDate: DateTime.now(),
+                  registrationDate: DateTime.now(), id: '',
                 );
                 UserService.createUser(user);
                 controllerUsername.clear();
