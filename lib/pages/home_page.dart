@@ -1,3 +1,4 @@
+import 'package:etarot/test/auth_test.dart';
 import 'package:etarot/test/card_face_service_test.dart';
 import 'package:etarot/test/user_service_test.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,15 @@ class HomePage extends StatelessWidget {
                 );
               },
               child: Text('faces'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AuthenticationTestPage()),
+                );
+              },
+              child: Text('Auth'),
             ),
           ],
         ),
