@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class AuthenticationTestPage extends StatefulWidget {
   @override
@@ -75,6 +76,30 @@ class _AuthenticationTestPageState extends State<AuthenticationTestPage> {
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
+              onPressed: () async {
+                try {
+                  await FirebaseAuth.instance.signInAnonymously();
+                  print('User signed in anonymously!');
+                } catch (e) {
+                  print('Error signing in anonymously: $e');
+                }
+              },
+              child: Text('Sign In Anonymously'),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
+              onPressed: () async {
+                try {
+                  await _signInWithGoogle();
+                  print('User signed in with Google!');
+                } catch (e) {
+                  print('Error signing in with Google: $e');
+                }
+              },
+              child: Text('Sign In with Google'),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(
               onPressed: () {
                 User? user = FirebaseAuth.instance.currentUser;
                 if (user != null) {
@@ -89,6 +114,20 @@ class _AuthenticationTestPageState extends State<AuthenticationTestPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      throw e;
+    }
   }
 }
 
