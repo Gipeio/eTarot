@@ -1,6 +1,6 @@
 import 'package:etarot/test/auth_test.dart';
 import 'package:etarot/test/card_face_service_test.dart';
-import 'package:etarot/test/user_service_test.dart';
+import 'package:etarot/test/card_service_test.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -18,10 +18,10 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => UserServiceTest()),
+                  MaterialPageRoute(builder: (context) => CardTestPage()),
                 );
               },
-              child: Text('users'),
+              child: Text('cards'),
             ),
             ElevatedButton(
               onPressed: () {

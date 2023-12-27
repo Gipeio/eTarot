@@ -1,5 +1,3 @@
-import 'package:etarot/model/CardFace.dart';
-
 class Card {
   final String id;
   final String name;
