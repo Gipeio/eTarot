@@ -1,3 +1,4 @@
+import 'package:etarot/pages/menu_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -14,9 +15,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Authentication Page'),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -39,11 +37,10 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
-                _showGuestWarningDialog();
+                _showGuestWarningDialog(context);
               },
               child: Text('Continue as Guest'),
             ),
-            // ...rest of your code
           ],
         ),
       ),
@@ -87,6 +84,7 @@ class _HomePageState extends State<HomePage> {
                   );
                   print('User signed in successfully!');
                   Navigator.pop(context); // Close the dialog
+                  _navigateToAccountPage();
                 } catch (e) {
                   print('Error signing in: $e');
                 }
@@ -143,6 +141,7 @@ class _HomePageState extends State<HomePage> {
                     );
                     print('User signed up successfully!');
                     Navigator.pop(context); // Close the dialog
+                    _navigateToAccountPage();
                   } else {
                     print('Passwords do not match');
                   }
@@ -158,7 +157,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _showGuestWarningDialog() {
+  void _showGuestWarningDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -177,6 +176,7 @@ class _HomePageState extends State<HomePage> {
                 // Add logic to continue as a guest
                 print('User continued as a guest!');
                 Navigator.pop(context); // Close the dialog
+                _navigateToAccountPage();
               },
               child: Text('Continue'),
             ),
@@ -186,7 +186,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // ...rest of your code
+  void _navigateToAccountPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MenuPage()),
+    );
+  }
 }
 
 void main() {
