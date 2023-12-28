@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Drawing {
   final String id;
   final String userId;
@@ -29,7 +31,7 @@ class Drawing {
     return Drawing(
       id: id,
       userId: json?['userId'] ?? '',
-      drawingDate: DateTime.parse(json?['drawingDate'] ?? ''),
+      drawingDate: (json?['drawingDate'] as Timestamp)?.toDate() ?? DateTime.now(),      
       cardFaceIds: List<String>.from(json?['cardFaceIds'] ?? []),
       objectiveNote: json?['objectiveNote'] ?? 0,
       subjectiveNote: json?['subjectiveNote'] ?? 0,
