@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class CardFace<T> {
+class CardFace {
   final String id;
   final String meaning;
   final int note;
