@@ -1,6 +1,7 @@
 import 'package:etarot/pages/menu_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -40,6 +41,18 @@ class _HomePageState extends State<HomePage> {
                 _showGuestWarningDialog(context);
               },
               child: Text('Continue as Guest'),
+            ),
+                        ElevatedButton(
+              onPressed: () async {
+                try {
+                  await _signInWithGoogle();
+                  print('User signed in with Google!');
+                  _navigateToAccountPage();
+                } catch (e) {
+                  print('Error signing in with Google: $e');
+                }
+              },
+              child: Text('Sign In with Google'),
             ),
           ],
         ),
@@ -185,6 +198,21 @@ class _HomePageState extends State<HomePage> {
       },
     );
   }
+
+  Future<void> _signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+      await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      throw e;
+    }
+  }
+
 
   void _navigateToAccountPage() {
     Navigator.push(
