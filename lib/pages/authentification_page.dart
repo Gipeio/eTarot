@@ -1,4 +1,5 @@
 import 'package:etarot/pages/menu_page.dart';
+import 'package:etarot/styling/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -11,21 +12,32 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  final TextEditingController confirmPasswordController = TextEditingController();
+  final TextEditingController confirmPasswordController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Style.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Text('Connect With Cards',
+              style: TextStyle(
+                color: Style.itemTextColor
+              ),
+            ),
             SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 _showSignInDialog();
               },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Style.itemTextColor,
+                backgroundColor: Style.itemColor, // Text color
+              ),
               child: Text('Sign In with Email'),
             ),
             SizedBox(height: 16.0),
@@ -33,16 +45,14 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 _showSignUpDialog();
               },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Style.itemTextColor,
+                backgroundColor: Style.itemColor, // Text color
+              ),
               child: Text('Sign Up with Email'),
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
-              onPressed: () {
-                _showGuestWarningDialog(context);
-              },
-              child: Text('Continue as Guest'),
-            ),
-                        ElevatedButton(
               onPressed: () async {
                 try {
                   await _signInWithGoogle();
@@ -52,7 +62,25 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing in with Google: $e');
                 }
               },
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Style.itemTextColor,
+                backgroundColor: Style.itemColor, // Text color
+              ),
               child: Text('Sign In with Google'),
+            ),
+            SizedBox(height: 16.0),
+            GestureDetector(
+              onTap: () {
+                _showGuestWarningDialog(context);
+              },
+              child: const Text(
+                'Continue as Guest',
+                style: TextStyle(
+                  color: Style.guestRedirectTextColor, // Text color
+                  decoration:
+                      TextDecoration.underline, // Optional: Add underline
+                ),
+              ),
             ),
           ],
         ),
@@ -147,7 +175,8 @@ class _HomePageState extends State<HomePage> {
             ElevatedButton(
               onPressed: () async {
                 try {
-                  if (passwordController.text == confirmPasswordController.text) {
+                  if (passwordController.text ==
+                      confirmPasswordController.text) {
                     await FirebaseAuth.instance.createUserWithEmailAndPassword(
                       email: emailController.text,
                       password: passwordController.text,
@@ -175,19 +204,18 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Warning'),
-          content: Text('Some functionalities are disabled when logged in as a guest. For the best experience, log in with an account.'),
+          title: const Text('Warning'),
+          content: const Text(
+              'Some functionalities are disabled when logged in as a guest. For the best experience, log in with an account.'),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () async {
-                // Add logic to continue as a guest
-                print('User continued as a guest!');
                 Navigator.pop(context); // Close the dialog
                 _navigateToAccountPage();
               },
@@ -202,7 +230,8 @@ class _HomePageState extends State<HomePage> {
   Future<void> _signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser!.authentication;
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
@@ -212,7 +241,6 @@ class _HomePageState extends State<HomePage> {
       throw e;
     }
   }
-
 
   void _navigateToAccountPage() {
     Navigator.push(
