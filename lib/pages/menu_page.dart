@@ -1,4 +1,4 @@
-import 'package:etarot/pages/home_page.dart';
+import 'package:etarot/pages/authentification_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
