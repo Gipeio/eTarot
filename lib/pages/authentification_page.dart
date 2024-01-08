@@ -1,5 +1,7 @@
 import 'package:etarot/pages/menu_page.dart';
+import 'package:etarot/styling/button_style.dart';
 import 'package:etarot/styling/style.dart';
+import 'package:etarot/test/front_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -30,15 +32,11 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
+            CustomButtonStyle(
+              label: 'Sign In with Email',
               onPressed: () {
                 _showSignInDialog();
               },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Style.itemTextColor,
-                backgroundColor: Style.itemColor, // Text color
-              ),
-              child: Text('Sign In with Email'),
             ),
             SizedBox(height: 16.0),
             ElevatedButton(
@@ -245,7 +243,7 @@ class _HomePageState extends State<HomePage> {
   void _navigateToAccountPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => MenuPage()),
+      MaterialPageRoute(builder: (context) => FrontTestPage()),
     );
   }
 }
