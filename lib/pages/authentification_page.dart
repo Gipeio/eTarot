@@ -1,10 +1,12 @@
-import 'package:etarot/pages/menu_page.dart';
 import 'package:etarot/styling/button_style.dart';
+import 'package:etarot/styling/google_login_button_style.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:etarot/test/front_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 
 class HomePage extends StatefulWidget {
   @override
@@ -28,7 +30,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Text('Connect With Cards',
               style: TextStyle(
-                color: Style.itemTextColor
+                color: Style.itemColor
               ),
             ),
             SizedBox(height: 16.0),
@@ -39,18 +41,14 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
+            CustomButtonStyle(
               onPressed: () {
                 _showSignUpDialog();
               },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Style.itemTextColor,
-                backgroundColor: Style.itemColor, // Text color
-              ),
-              child: Text('Sign Up with Email'),
+              label: 'Sign Up with Email',
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
+            GoogleLoginButton(
               onPressed: () async {
                 try {
                   await _signInWithGoogle();
@@ -60,11 +58,6 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing in with Google: $e');
                 }
               },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Style.itemTextColor,
-                backgroundColor: Style.itemColor, // Text color
-              ),
-              child: Text('Sign In with Google'),
             ),
             SizedBox(height: 16.0),
             GestureDetector(

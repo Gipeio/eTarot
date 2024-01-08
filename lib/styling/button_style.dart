@@ -1,3 +1,4 @@
+import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
 
 class CustomButtonStyle extends StatelessWidget {
@@ -17,7 +18,7 @@ class CustomButtonStyle extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3.0),
           gradient: const LinearGradient(
-            colors: [Color(0xFFE052A0), Color(0xFFF15C41)],
+            colors: [Style.itemColor,Style.itemColorDeg],
             end: Alignment.centerRight,
           ),
         ),
