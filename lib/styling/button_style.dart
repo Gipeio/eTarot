@@ -19,15 +19,15 @@ class CustomButtonStyle extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3.0),
           gradient: const LinearGradient(
-            colors: [Style.itemColor,Style.itemColorDeg],
+            colors: [Style.itemColor, Style.itemColorDeg],
             end: Alignment.centerRight,
           ),
         ),
         padding: const EdgeInsets.fromLTRB(18.0, 16.0, 18.0, 15.0),
         child: Text(
           label,
+          textAlign: TextAlign.center, // Center the text horizontally
           style: const TextStyle(
-            
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
             color: Colors.white,

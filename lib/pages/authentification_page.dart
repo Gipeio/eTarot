@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -21,7 +20,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth;
     return Scaffold(
       backgroundColor: Style.backgroundColor,
       body: Padding(
@@ -33,8 +31,9 @@ class _HomePageState extends State<HomePage> {
               child: Text(
                 'Connect With Cards',
                 style: TextStyle(
+                  fontFamily: 'Rocher',
                   fontSize: 40,
-                  color: Style.itemColor,
+                  color: Style.itemTextColor,
                 ),
               ),
             ),
@@ -73,7 +72,8 @@ class _HomePageState extends State<HomePage> {
                 'Continue as Guest',
                 style: TextStyle(
                   color: Style.guestRedirectTextColor, // Text color
-                  decoration: TextDecoration.underline, // Optional: Add underline
+                  decoration:
+                      TextDecoration.underline, // Optional: Add underline
                 ),
               ),
             ),
@@ -88,18 +88,30 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Sign In with Email'),
+          backgroundColor: Style.backgroundColor,
+          title: const Text(
+            'Sign In with Email',
+            style: TextStyle(
+              color: Style.itemTextColor, // Change the title color
+            ),
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: Style.itemTextColor),
+                ),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Style.itemTextColor),
+                ),
                 obscureText: true,
               ),
             ],
@@ -109,9 +121,18 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: const Text('Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Style.itemColor), // Change the button color
+              ),
               onPressed: () async {
                 try {
                   await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -125,7 +146,12 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing in: $e');
                 }
               },
-              child: const Text('Sign In'),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
           ],
         );
@@ -138,24 +164,39 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Sign Up with Email'),
+          title: const Text(
+            'Sign Up with Email',
+            style: TextStyle(
+              color: Style.itemTextColor, // Change the title color
+            ),
+          ),
+          backgroundColor: Style.backgroundColor,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: const InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  labelStyle: TextStyle(color: Style.itemTextColor),
+                ),
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: passwordController,
-                decoration: const InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  labelStyle: TextStyle(color: Style.itemTextColor),
+                ),
                 obscureText: true,
               ),
               const SizedBox(height: 16.0),
               TextField(
                 controller: confirmPasswordController,
-                decoration: const InputDecoration(labelText: 'Confirm Password'),
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  labelStyle: TextStyle(color: Style.itemTextColor),
+                ),
                 obscureText: true,
               ),
             ],
@@ -165,9 +206,18 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: const Text('Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
             ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Style.itemColor), // Change the button color
+              ),
               onPressed: () async {
                 try {
                   if (passwordController.text ==
@@ -186,7 +236,12 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing up: $e');
                 }
               },
-              child: const Text('Sign Up'),
+              child: const Text(
+                'Sign Up',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
           ],
         );

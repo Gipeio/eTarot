@@ -9,4 +9,5 @@ class Style {
   static const Color itemColorDeg = Color.fromRGBO(243, 119, 60, 1.0);
   static const Color itemTextColor = Colors.white;
   static const Color guestRedirectTextColor = Color.fromRGBO(96, 116, 133, 1.0);
+  static const Color thirdColor = Color.fromRGBO(174, 68, 90, 1.0);
 }
