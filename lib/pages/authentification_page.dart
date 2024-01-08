@@ -21,33 +21,38 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    double screenWidth;
     return Scaffold(
       backgroundColor: Style.backgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text('Connect With Cards',
-              style: TextStyle(
-                color: Style.itemColor
+            SizedBox(height: MediaQuery.of(context).size.height * 0.15),
+            const Center(
+              child: Text(
+                'Connect With Cards',
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Style.itemColor,
+                ),
               ),
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.2),
             CustomButtonStyle(
               label: 'Sign In with Email',
               onPressed: () {
                 _showSignInDialog();
               },
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
             CustomButtonStyle(
               onPressed: () {
                 _showSignUpDialog();
               },
               label: 'Sign Up with Email',
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
             GoogleLoginButton(
               onPressed: () async {
                 try {
@@ -59,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            SizedBox(height: 16.0),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.025),
             GestureDetector(
               onTap: () {
                 _showGuestWarningDialog(context);
@@ -68,8 +73,7 @@ class _HomePageState extends State<HomePage> {
                 'Continue as Guest',
                 style: TextStyle(
                   color: Style.guestRedirectTextColor, // Text color
-                  decoration:
-                      TextDecoration.underline, // Optional: Add underline
+                  decoration: TextDecoration.underline, // Optional: Add underline
                 ),
               ),
             ),
@@ -84,18 +88,18 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Sign In with Email'),
+          title: const Text('Sign In with Email'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
             ],
@@ -105,7 +109,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -121,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing in: $e');
                 }
               },
-              child: Text('Sign In'),
+              child: const Text('Sign In'),
             ),
           ],
         );
@@ -134,24 +138,24 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Sign Up with Email'),
+          title: const Text('Sign Up with Email'),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: emailController,
-                decoration: InputDecoration(labelText: 'Email'),
+                decoration: const InputDecoration(labelText: 'Email'),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 controller: passwordController,
-                decoration: InputDecoration(labelText: 'Password'),
+                decoration: const InputDecoration(labelText: 'Password'),
                 obscureText: true,
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextField(
                 controller: confirmPasswordController,
-                decoration: InputDecoration(labelText: 'Confirm Password'),
+                decoration: const InputDecoration(labelText: 'Confirm Password'),
                 obscureText: true,
               ),
             ],
@@ -161,7 +165,7 @@ class _HomePageState extends State<HomePage> {
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () async {
@@ -182,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                   print('Error signing up: $e');
                 }
               },
-              child: Text('Sign Up'),
+              child: const Text('Sign Up'),
             ),
           ],
         );
@@ -210,7 +214,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.pop(context); // Close the dialog
                 _navigateToAccountPage();
               },
-              child: Text('Continue'),
+              child: const Text('Continue'),
             ),
           ],
         );

@@ -15,6 +15,7 @@ class CustomButtonStyle extends StatelessWidget {
     return InkWell(
       onTap: onPressed,
       child: Container(
+        width: MediaQuery.of(context).size.width * 0.8,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(3.0),
           gradient: const LinearGradient(
@@ -26,6 +27,7 @@ class CustomButtonStyle extends StatelessWidget {
         child: Text(
           label,
           style: const TextStyle(
+            
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
             color: Colors.white,
