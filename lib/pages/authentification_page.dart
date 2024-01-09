@@ -254,22 +254,47 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Warning'),
-          content: const Text(
-              'Some functionalities are disabled when logged in as a guest. For the best experience, log in with an account.'),
-          actions: [
+          backgroundColor: Style.backgroundColor,
+              title: const Text(
+                'Warning',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
+          
+                        content: const Text(
+                'Some functionalities are disabled when logged in as a guest. For the best experience, log in with an account.',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
+            actions: [
             TextButton(
               onPressed: () {
                 Navigator.pop(context); // Close the dialog
               },
-              child: const Text('Cancel'),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
             ElevatedButton(
+                style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                    Style.itemColor), // Change the button color
+              ),
               onPressed: () async {
                 Navigator.pop(context); // Close the dialog
                 _navigateToAccountPage();
               },
-              child: const Text('Continue'),
+              child: const Text(
+                'Continue',
+                style: TextStyle(
+                  color: Style.itemTextColor, // Change the title color
+                ),
+              ),
             ),
           ],
         );
