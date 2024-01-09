@@ -22,7 +22,7 @@ class MenuPage extends StatelessWidget {
                   await FirebaseAuth.instance.signOut();
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
+                    MaterialPageRoute(builder: (context) => AuthPage()),
                   );
                 },
                 child: Text('Logout'),

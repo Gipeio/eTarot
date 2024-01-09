@@ -1,3 +1,4 @@
+import 'package:etarot/pages/menu_page.dart';
 import 'package:etarot/styling/button_style.dart';
 import 'package:etarot/styling/google_login_button_style.dart';
 import 'package:etarot/styling/style.dart';
@@ -7,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class HomePage extends StatefulWidget {
+class AuthPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _AuthPageState createState() => _AuthPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _AuthPageState extends State<AuthPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController =
@@ -320,13 +321,13 @@ class _HomePageState extends State<HomePage> {
   void _navigateToAccountPage() {
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => FrontTestPage()),
+      MaterialPageRoute(builder: (context) => MenuPage()),
     );
   }
 }
 
 void main() {
   runApp(MaterialApp(
-    home: HomePage(),
+    home: AuthPage(),
   ));
 }
