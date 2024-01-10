@@ -1,6 +1,7 @@
 import 'package:etarot/pages/authentification_page.dart';
 import 'package:etarot/pages/draw_page.dart';
 import 'package:etarot/pages/stat_page.dart';
+import 'package:etarot/pages/tutorial_page.dart';
 import 'package:etarot/styling/button_style.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,7 +28,9 @@ class MenuPage extends StatelessWidget {
                 color: Style.itemTextColor,
               ),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.25),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.20),
+            CustomButtonStyle(label: 'Tutorial', onPressed: () => _navigateToPage(context, 'Tutorial')),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             CustomButtonStyle(label: 'Draw', onPressed: () => _navigateToPage(context, 'Draw')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 SizedBox(
@@ -82,7 +85,11 @@ void _navigateToPage(BuildContext context, String pageName) {
         context,
         MaterialPageRoute(builder: (context) => StatPage()),
       );
-      break;
+    case 'Tutorial':
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => TutorialPage()),
+      );
     default:
       print('Unknown page: $pageName');
   }
