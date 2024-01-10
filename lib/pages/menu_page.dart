@@ -7,6 +7,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MenuPage extends StatelessWidget {
+  
+  String currentUser = FirebaseAuth.instance.currentUser?.email ?? 'Guest';
+
+  MenuPage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +20,7 @@ class MenuPage extends StatelessWidget {
           children: [
             SizedBox(height: MediaQuery.of(context).size.height * 0.15),
             Text(
-              'Current User: ${FirebaseAuth.instance.currentUser?.email ?? 'Guest'}',
+              'Current User: $currentUser',
               style: const TextStyle(
                 fontFamily: 'Rocher',
                 fontSize: 40,
@@ -26,7 +30,18 @@ class MenuPage extends StatelessWidget {
             SizedBox(height: MediaQuery.of(context).size.height * 0.25),
             CustomButtonStyle(label: 'Draw', onPressed: () => _navigateToPage(context, 'Draw')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            CustomButtonStyle(label: 'Statistics', onPressed: () => _navigateToPage(context, 'Statistics')),
+SizedBox(
+  child: currentUser != 'Guest'
+      ? CustomButtonStyle(
+          label: 'Statistics',
+          onPressed: () => _navigateToPage(context, 'Statistics'),
+        )
+      : CustomButtonStyle(
+          disabled: true,
+          label: 'Statistics',
+          onPressed: () => _navigateToPage(context, 'Statistics'),
+        ),
+),
             SizedBox(height: MediaQuery.of(context).size.height * 0.175),
             GestureDetector(
               onTap: () async {
