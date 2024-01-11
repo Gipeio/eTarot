@@ -2,7 +2,7 @@ import 'package:etarot/pages/authentification_page.dart';
 import 'package:etarot/pages/draw_page.dart';
 import 'package:etarot/pages/stat_page.dart';
 import 'package:etarot/pages/tutorial_page.dart';
-import 'package:etarot/styling/button_style.dart';
+import 'package:etarot/objects/button_object.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

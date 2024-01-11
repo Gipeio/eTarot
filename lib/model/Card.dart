@@ -1,10 +1,10 @@
-class Card {
+class TarotCard {
   final String id;
   final String name;
   final String faceId;
   final String reversedFaceId;
 
-  Card({
+  TarotCard({
     required this.id,
     required this.name,
     required this.faceId,
@@ -18,8 +18,8 @@ class Card {
         'reversedFace': reversedFaceId,
       };
 
-  factory Card.fromJson(Map<String, dynamic>? json, String id) {
-    return Card(
+  factory TarotCard.fromJson(Map<String, dynamic>? json, String id) {
+    return TarotCard(
       id: id,
       name: json?['name'] ?? '',
       faceId: json?['faceId'] ?? '',

@@ -1,6 +1,6 @@
 import 'package:etarot/services/card_service.dart';
 import 'package:flutter/material.dart';
-import 'package:etarot/model/Card.dart' as model; 
+import 'package:etarot/model/Card.dart'; 
 
 class CardTestPage extends StatefulWidget {
   @override
@@ -9,7 +9,7 @@ class CardTestPage extends StatefulWidget {
 
 class _CardTestPageState extends State<CardTestPage> {
   CardService cardService = CardService();
-  List<model.Card> allCards = [];
+  List<TarotCard> allCards = [];
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _CardTestPageState extends State<CardTestPage> {
             ElevatedButton(
               onPressed: () async {
                 // When the button is pressed, retrieve all cards
-                List<model.Card> cards = await cardService.getAllCards();
+                List<TarotCard> cards = await cardService.getAllCards();
 
                 // Update the state with the retrieved cards
                 setState(() {
