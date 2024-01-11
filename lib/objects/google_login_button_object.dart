@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class GoogleLoginButton extends StatelessWidget {
+class GoogleLoginButtonObject extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const GoogleLoginButton({super.key, required this.onPressed});
+  const GoogleLoginButtonObject({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

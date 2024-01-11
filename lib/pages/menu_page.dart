@@ -29,17 +29,17 @@ class MenuPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.20),
-            CustomButtonStyle(label: 'Tutorial', onPressed: () => _navigateToPage(context, 'Tutorial')),
+            CustomButtonObject(label: 'Tutorial', onPressed: () => _navigateToPage(context, 'Tutorial')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
-            CustomButtonStyle(label: 'Draw', onPressed: () => _navigateToPage(context, 'Draw')),
+            CustomButtonObject(label: 'Draw', onPressed: () => _navigateToPage(context, 'Draw')),
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
 SizedBox(
   child: currentUser != 'Guest'
-      ? CustomButtonStyle(
+      ? CustomButtonObject(
           label: 'Statistics',
           onPressed: () => _navigateToPage(context, 'Statistics'),
         )
-      : CustomButtonStyle(
+      : CustomButtonObject(
           disabled: true,
           label: 'Statistics',
           onPressed: () => _navigateToPage(context, 'Statistics'),

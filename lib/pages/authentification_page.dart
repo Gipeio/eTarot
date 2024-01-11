@@ -39,21 +39,21 @@ class _AuthPageState extends State<AuthPage> {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.2),
-            CustomButtonStyle(
+            CustomButtonObject(
               label: 'Sign In with Email',
               onPressed: () {
                 _showSignInDialog();
               },
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025),
-            CustomButtonStyle(
+            CustomButtonObject(
               onPressed: () {
                 _showSignUpDialog();
               },
               label: 'Sign Up with Email',
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.025),
-            GoogleLoginButton(
+            GoogleLoginButtonObject(
               onPressed: () async {
                 try {
                   await _signInWithGoogle();

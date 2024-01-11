@@ -1,4 +1,5 @@
 import 'package:etarot/model/Card.dart';
+import 'package:etarot/objects/draw_emplacement_object.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
 import 'package:etarot/services/card_service.dart';
@@ -27,21 +28,7 @@ class _DrawPageState extends State<DrawPage> {
       body: GridView.count(
         crossAxisCount: 2,
         children: List.generate(4, (index) {
-          return GestureDetector(
-            onTap: () {
-              // Add your functionality here when the rectangle is clicked
-              print('Rectangle ${index + 1} clicked!');
-            },
-            child: Container(
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              // You can customize the content of each rectangle here
-            ),
-          );
+          return DrawEmplacementObject(index: index);
         }),
       ),
     );

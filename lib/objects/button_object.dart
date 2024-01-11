@@ -1,12 +1,12 @@
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
 
-class CustomButtonStyle extends StatelessWidget {
+class CustomButtonObject extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
   final bool disabled;
 
-  const CustomButtonStyle({
+  const CustomButtonObject({
     required this.label,
     required this.onPressed,
     this.disabled = false, // Optional parameter with a default value
