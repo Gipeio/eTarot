@@ -53,7 +53,7 @@ class _DrawPageState extends State<DrawPage> {
                 childAspectRatio: MediaQuery.of(context).size.width / (2 * MediaQuery.of(context).size.height * 0.4),
               ),
               itemBuilder: (context, index) {
-                return DrawEmplacementObject(index: index);
+                return DrawEmplacementObject(index: index, onPressed: drawCard);
               },
               itemCount: 4,
             ),

@@ -1,19 +1,20 @@
+import 'package:etarot/model/Card.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
 
 class DrawEmplacementObject extends StatelessWidget {
   final int index;
+  final VoidCallback onPressed;
   final bool occupied;
+  final TarotCard? card;
 
 
   const DrawEmplacementObject({
     required this.index,
+    required this.onPressed,
     this.occupied = false,
+    this.card,
   });
-
-  void onPressed(){
-    
-  }
 
   @override
   Widget build(BuildContext context) {
