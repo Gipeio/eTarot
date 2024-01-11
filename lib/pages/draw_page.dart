@@ -21,9 +21,13 @@ class _DrawPageState extends State<DrawPage> {
   }
 
   void _nullFunc() {
-    for (TarotCard card in deck) {
-      print(card.name);
-    }
+    print(deck.toString());
+  }
+
+  void drawCard() {
+    deck.shuffle();
+    print(deck[0].name);
+    deck.removeAt(0);
   }
 
   Future<void> loadCards() async {

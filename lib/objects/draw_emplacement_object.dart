@@ -3,19 +3,23 @@ import 'package:flutter/material.dart';
 
 class DrawEmplacementObject extends StatelessWidget {
   final int index;
+  final bool occupied;
+
 
   const DrawEmplacementObject({
     required this.index,
+    this.occupied = false,
   });
+
+  void onPressed(){
+    
+  }
 
   @override
   Widget build(BuildContext context) {
 
     return GestureDetector(
-      onTap: () {
-        // Add your functionality here when the rectangle is clicked
-        print('Rectangle $index clicked!');
-      },
+      onTap: onPressed,
       child: Container(
         margin: EdgeInsets.all(14.0),
         decoration: BoxDecoration(
