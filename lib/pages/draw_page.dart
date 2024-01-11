@@ -11,22 +11,28 @@ class DrawPage extends StatefulWidget {
 }
 
 class _DrawPageState extends State<DrawPage> {
+  late List<TarotCard> deck;
+
   @override
   void initState() {
     super.initState();
+    deck = [];
     loadCards();
   }
 
   void _nullFunc() {
-    // Add functionality for button press here
-  }
-
-    Future<void> loadCards() async {
-    CardService cardService = CardService();
-    List<TarotCard> cards = await cardService.getAllCards();
-    for (TarotCard card in cards){
+    for (TarotCard card in deck) {
       print(card.name);
     }
+  }
+
+  Future<void> loadCards() async {
+    CardService cardService = CardService();
+    List<TarotCard> loadedDeck = await cardService.getAllCards();
+    
+    setState(() {
+      deck = loadedDeck;
+    });
   }
 
   @override
@@ -48,7 +54,7 @@ class _DrawPageState extends State<DrawPage> {
               itemCount: 4,
             ),
           ),
-          CustomButtonObject(label: "aeazeaze", onPressed: _nullFunc),
+          CustomButtonObject(label: "Continue", onPressed: _nullFunc),
         ],
       ),
     );
