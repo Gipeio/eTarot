@@ -7,6 +7,7 @@ class DrawEmplacementObject extends StatefulWidget {
   bool occupied;
   TarotCard? card;
   final List<TarotCard> deck;
+  DecorationImage? backgroundImage;
 
   DrawEmplacementObject({
     Key? key,
@@ -14,6 +15,7 @@ class DrawEmplacementObject extends StatefulWidget {
     required this.deck,
     this.occupied = false,
     this.card,
+    this.backgroundImage,
   });
 
     void updateCard(TarotCard card) {
@@ -41,30 +43,39 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     setState(() {
       widget.card = card;
       widget.occupied = true;
-      backgroundColor = Style.itemColor;
+      // Set the background image for occupied state
+      // Replace 'your_image_path.png' with the path to your image asset
+      widget.backgroundImage = DecorationImage(
+        image: AssetImage('assets/eTarot_logo.png'),
+        fit: BoxFit.cover,
+      );
     });
   }
 
 
-  @override
+ @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         if (!widget.occupied) {
+          pressEmptyEmplacement();
 
           if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
             TarotCard drawnCard = widget.deck.removeAt(0);
-            print(drawnCard.name);
+            print("added " + drawnCard.name + " deck is now: " + widget.deck.length.toString());
             // Call the updateCard method from the state
             updateCard(drawnCard);
+          } else {
+            print(widget.card?.name);
           }
-        } else {print(widget.card?.name);}
+        }
       },
       child: Container(
         margin: EdgeInsets.all(14.0),
         decoration: BoxDecoration(
-          color: backgroundColor,
+          // Use backgroundImage property for setting the background image
+          image: widget.backgroundImage,
           border: Border.all(color: Style.itemColor),
           borderRadius: BorderRadius.circular(40.0),
         ),
