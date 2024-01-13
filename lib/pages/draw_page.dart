@@ -24,11 +24,9 @@ class _DrawPageState extends State<DrawPage> {
     print(deck.toString());
   }
 
-  void drawCard() {
-    deck.shuffle();
-    print(deck[0].name);
-    deck.removeAt(0);
-  }
+  void drawCard(DrawEmplacementObject emplacement) {
+  emplacement.changeColorExternally();
+    }
 
   Future<void> loadCards() async {
     CardService cardService = CardService();
@@ -53,7 +51,7 @@ class _DrawPageState extends State<DrawPage> {
                 childAspectRatio: MediaQuery.of(context).size.width / (2 * MediaQuery.of(context).size.height * 0.4),
               ),
               itemBuilder: (context, index) {
-                return DrawEmplacementObject(index: index, onPressed: drawCard);
+                return DrawEmplacementObject(index: index, onPressed: () => drawCard);
               },
               itemCount: 4,
             ),
