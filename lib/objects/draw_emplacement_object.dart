@@ -55,11 +55,11 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
           if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
             TarotCard drawnCard = widget.deck.removeAt(0);
-
+            print(drawnCard.name);
             // Call the updateCard method from the state
             updateCard(drawnCard);
           }
-        }
+        } else {print(widget.card?.name);}
       },
       child: Container(
         margin: EdgeInsets.all(14.0),
