@@ -5,21 +5,29 @@ import 'package:flutter/material.dart';
 class DrawEmplacementObject extends StatefulWidget {
   final int index;
   final Function() onPressed;
-  final bool occupied;
-  final TarotCard? card;
+  bool occupied;
+  TarotCard? card;
+  final List<TarotCard> deck;
 
-  const DrawEmplacementObject({
+  DrawEmplacementObject({
     Key? key,
     required this.index,
     required this.onPressed,
+    required this.deck,
     this.occupied = false,
     this.card,
-  }) : super(key: key);
+  });
+
+    void updateCard(TarotCard card) {
+    // Delegating the call to the state's updateCard method
+    _drawEmplacementObjectState.updateCard(card);
+  }
+
+  _DrawEmplacementObjectState get _drawEmplacementObjectState =>
+      _DrawEmplacementObjectState();
 
   @override
   _DrawEmplacementObjectState createState() => _DrawEmplacementObjectState();
-
-  void changeColorExternally() {}
 }
 
 class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
@@ -31,15 +39,30 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     });
   }
 
+  void updateCard(TarotCard card) {
+    setState(() {
+      widget.card = card;
+      widget.occupied = true;
+      backgroundColor = Style.itemColor;
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        widget.onPressed();
-      },
-      onTapDown: (details) {
         if (!widget.occupied) {
           pressEmptyEmplacement();
+          widget.onPressed();
+
+          if (widget.deck.isNotEmpty) {
+            widget.deck.shuffle();
+            TarotCard drawnCard = widget.deck.removeAt(0);
+
+            // Call the updateCard method from the state
+            updateCard(drawnCard);
+          }
         }
       },
       child: Container(
@@ -52,10 +75,5 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
         // Your other widget content here
       ),
     );
-  }
-
-  // Additional method to change color externally
-  void changeColorExternally() {
-    pressEmptyEmplacement();
   }
 }

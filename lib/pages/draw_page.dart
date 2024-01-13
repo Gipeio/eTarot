@@ -20,13 +20,22 @@ class _DrawPageState extends State<DrawPage> {
     loadCards();
   }
 
+    void drawCard(DrawEmplacementObject emplacement) {
+    if (deck.isNotEmpty) {
+      // Shuffle the deck
+      deck.shuffle();
+
+      // Take the first card from the deck
+      TarotCard drawnCard = deck.removeAt(0);
+
+      // Update the card for the specific DrawEmplacementObject
+      emplacement.updateCard(drawnCard);
+    }
+  }
+
   void _nullFunc() {
     print(deck.toString());
   }
-
-  void drawCard(DrawEmplacementObject emplacement) {
-  emplacement.changeColorExternally();
-    }
 
   Future<void> loadCards() async {
     CardService cardService = CardService();
@@ -44,14 +53,18 @@ class _DrawPageState extends State<DrawPage> {
       body: Column(
         children: [
           Container(
-            height: MediaQuery.of(context).size.height * 0.85, // Set a fixed height for GridView
+            height: MediaQuery.of(context).size.height * 0.85,
             child: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
                 childAspectRatio: MediaQuery.of(context).size.width / (2 * MediaQuery.of(context).size.height * 0.4),
               ),
               itemBuilder: (context, index) {
-                return DrawEmplacementObject(index: index, onPressed: () => drawCard);
+                return DrawEmplacementObject(
+                  index: index,
+                  onPressed: () => drawCard,
+                  deck: deck,
+                );
               },
               itemCount: 4,
             ),
