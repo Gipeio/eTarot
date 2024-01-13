@@ -20,19 +20,6 @@ class _DrawPageState extends State<DrawPage> {
     loadCards();
   }
 
-    void drawCard(DrawEmplacementObject emplacement) {
-    if (deck.isNotEmpty) {
-      // Shuffle the deck
-      deck.shuffle();
-
-      // Take the first card from the deck
-      TarotCard drawnCard = deck.removeAt(0);
-
-      // Update the card for the specific DrawEmplacementObject
-      emplacement.updateCard(drawnCard);
-    }
-  }
-
   void _nullFunc() {
     print(deck.toString());
   }
@@ -62,7 +49,6 @@ class _DrawPageState extends State<DrawPage> {
               itemBuilder: (context, index) {
                 return DrawEmplacementObject(
                   index: index,
-                  onPressed: () => drawCard,
                   deck: deck,
                 );
               },

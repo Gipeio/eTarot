@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 class DrawEmplacementObject extends StatefulWidget {
   final int index;
-  final Function() onPressed;
   bool occupied;
   TarotCard? card;
   final List<TarotCard> deck;
@@ -12,7 +11,6 @@ class DrawEmplacementObject extends StatefulWidget {
   DrawEmplacementObject({
     Key? key,
     required this.index,
-    required this.onPressed,
     required this.deck,
     this.occupied = false,
     this.card,
@@ -53,8 +51,6 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     return GestureDetector(
       onTap: () {
         if (!widget.occupied) {
-          pressEmptyEmplacement();
-          widget.onPressed();
 
           if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
