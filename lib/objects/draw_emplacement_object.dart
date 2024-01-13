@@ -39,14 +39,12 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     });
   }
 
-  void updateCard(TarotCard card) {
+  void updateCard(TarotCard card) { 
     setState(() {
       widget.card = card;
       widget.occupied = true;
-      // Set the background image for occupied state
-      // Replace 'your_image_path.png' with the path to your image asset
       widget.backgroundImage = DecorationImage(
-        image: AssetImage('assets/eTarot_logo.png'),
+        image: AssetImage('assets/cards/${card.id}.jpg'),
         fit: BoxFit.cover,
       );
     });
@@ -63,7 +61,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
           if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
             TarotCard drawnCard = widget.deck.removeAt(0);
-            print("added " + drawnCard.name + " deck is now: " + widget.deck.length.toString());
+            print("added " + drawnCard.id + " deck is now: " + widget.deck.length.toString());
             // Call the updateCard method from the state
             updateCard(drawnCard);
           } else {
