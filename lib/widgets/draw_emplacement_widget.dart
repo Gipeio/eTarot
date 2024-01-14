@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:etarot/model/Card.dart';
+import 'package:etarot/model/CardFace.dart';
+import 'package:etarot/services/card_face_service.dart';
 import 'package:etarot/widgets/card_detail_widget.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +12,8 @@ class DrawEmplacementObject extends StatefulWidget {
   bool occupied;
   bool hidden;
   TarotCard? card;
+  CardFace? cardFace;
+  int facePosition;
   final List<TarotCard> deck;
   DecorationImage? backgroundImage;
 
@@ -19,11 +25,13 @@ class DrawEmplacementObject extends StatefulWidget {
     this.hidden = true,
     this.card,
     this.backgroundImage,
+    this.cardFace,
+    this.facePosition = 0,
   });
 
-  void revealCard() {
+  void revealCard(int faceId) {
     // Delegating the call to the state's updateCard method
-    _drawEmplacementObjectState.revealCard();
+    _drawEmplacementObjectState.revealCard(faceId);
   }
 
   void addHiddenCard(TarotCard card) {
@@ -31,9 +39,10 @@ class DrawEmplacementObject extends StatefulWidget {
     _drawEmplacementObjectState.addHiddenCard(card);
   }
 
-  void showCardDetails(TarotCard card){
-    _drawEmplacementObjectState.showCardDetails(card);
+  void showCardDetails(TarotCard card, CardFace cardFace){
+    _drawEmplacementObjectState.showCardDetails(card, cardFace);
   }
+
 
   _DrawEmplacementObjectState get _drawEmplacementObjectState =>
       _DrawEmplacementObjectState();
@@ -45,14 +54,27 @@ class DrawEmplacementObject extends StatefulWidget {
 class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
   Color backgroundColor = Style.backgroundColor;
 
-  void revealCard() {
+  void revealCard(int reversed) {
+    if (reversed == 0) { 
     setState(() {
       widget.hidden = false;
       widget.backgroundImage = DecorationImage(
         image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
         fit: BoxFit.fill,
+        alignment: Alignment.center,
       );
     });
+    }
+
+    else {
+      setState(() {
+      widget.backgroundImage = DecorationImage(
+        image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
+        fit: BoxFit.fill,
+        alignment: Alignment.center,
+      );
+    });
+    }
   }
 
   void addHiddenCard(TarotCard card) {
@@ -62,16 +84,17 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
       widget.backgroundImage = const DecorationImage(
         image: AssetImage('assets/backCard.jpg'),
         fit: BoxFit.fill,
+        alignment: Alignment.center,
       );
     });
   }
 
-  void showCardDetails(TarotCard card) {
+  void showCardDetails(TarotCard card, CardFace cardFace) {
   Navigator.of(context).push(
     PageRouteBuilder(
       opaque: false,
       pageBuilder: (BuildContext context, _, __) {
-        return CardDetailWidget(card: card);
+        return CardDetailWidget(card: card, cardFace: cardFace);
       },
     ),
   );
@@ -80,17 +103,24 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (!widget.occupied) {
           widget.deck.shuffle();
           TarotCard drawnCard = widget.deck.removeAt(0);
           addHiddenCard(drawnCard);
-          // Call the updateCard method from the state
+          CardFaceService cardFaceService = CardFaceService();
+          List<CardFace> cardFaces = [];
+          CardFace? firstFace = await cardFaceService.getCardFace(widget.card!.faceId);
+          CardFace? secondFace = await cardFaceService.getCardFace(widget.card!.reversedFaceId);
+          cardFaces.add(firstFace!);
+          cardFaces.add(secondFace!);
+          widget.facePosition = Random().nextInt(2);
+          widget.cardFace = cardFaces[widget.facePosition];
         } else {
           if (widget.hidden) {
-            revealCard();
+            revealCard(widget.facePosition);
           } else {
-            showCardDetails(widget.card!);
+            showCardDetails(widget.card!, widget.cardFace!);
           }
         }
       },
