@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 class DrawEmplacementObject extends StatefulWidget {
   final int index;
   bool occupied;
+  bool hidden;
   TarotCard? card;
   final List<TarotCard> deck;
   DecorationImage? backgroundImage;
@@ -14,13 +15,19 @@ class DrawEmplacementObject extends StatefulWidget {
     required this.index,
     required this.deck,
     this.occupied = false,
+    this.hidden = true,
     this.card,
     this.backgroundImage,
   });
 
-    void updateCard(TarotCard card) {
+    void revealCard() {
     // Delegating the call to the state's updateCard method
-    _drawEmplacementObjectState.updateCard(card);
+    _drawEmplacementObjectState.revealCard();
+  }
+
+  void addHiddenCard(TarotCard card) {
+    // Delegating the call to the state's updateCard method
+    _drawEmplacementObjectState.addHiddenCard(card);
   }
 
   _DrawEmplacementObjectState get _drawEmplacementObjectState =>
@@ -33,18 +40,22 @@ class DrawEmplacementObject extends StatefulWidget {
 class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
   Color backgroundColor = Style.backgroundColor;
 
-  void pressEmptyEmplacement() {
+  void revealCard() { 
     setState(() {
-      backgroundColor = Colors.blue;
+      widget.hidden = false;
+      widget.backgroundImage = DecorationImage(
+        image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
+        fit: BoxFit.cover,
+      );
     });
   }
 
-  void updateCard(TarotCard card) { 
+  void addHiddenCard(TarotCard card) { 
     setState(() {
       widget.card = card;
       widget.occupied = true;
-      widget.backgroundImage = DecorationImage(
-        image: AssetImage('assets/cards/${card.id}.jpg'),
+      widget.backgroundImage = const DecorationImage(
+        image: AssetImage('assets/backCard.jpg'),
         fit: BoxFit.cover,
       );
     });
@@ -56,16 +67,14 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     return GestureDetector(
       onTap: () {
         if (!widget.occupied) {
-          pressEmptyEmplacement();
-
-          if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
             TarotCard drawnCard = widget.deck.removeAt(0);
-            print("added ${drawnCard.name} deck is now: ${widget.deck.length}");
+            addHiddenCard(drawnCard);
             // Call the updateCard method from the state
-            updateCard(drawnCard);
-          } 
         } else {
+          if (widget.hidden) {
+            revealCard();
+          }
             print(widget.card?.name);
           }
       },
