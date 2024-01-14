@@ -45,7 +45,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
       widget.hidden = false;
       widget.backgroundImage = DecorationImage(
         image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       );
     });
   }
@@ -56,7 +56,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
       widget.occupied = true;
       widget.backgroundImage = const DecorationImage(
         image: AssetImage('assets/backCard.jpg'),
-        fit: BoxFit.cover,
+        fit: BoxFit.fill,
       );
     });
   }
@@ -84,7 +84,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
           // Use backgroundImage property for setting the background image
           image: widget.backgroundImage,
           border: Border.all(color: Style.itemColor),
-          borderRadius: BorderRadius.circular(40.0),
+          borderRadius: BorderRadius.circular(10.0),
         ),
         // Your other widget content here
       ),
