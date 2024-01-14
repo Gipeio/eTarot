@@ -20,24 +20,22 @@ class _CardDetailWidgetState extends State<CardDetailWidget> {
         height: double.infinity,
         padding: EdgeInsets.all(16.0),
         color: Colors.black87,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/cards/${widget.card.id}.jpg',
-              height: MediaQuery.of(context).size.height * 0.8,
-              fit: BoxFit.contain,
-            ),
-            SizedBox(height: 16.0),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Text(
-                  widget.card.name ?? 'No meaning available',
-                  style: TextStyle(fontSize: 16.0, color: Colors.white),
-                ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/cards/${widget.card.id}.jpg',
+                height: MediaQuery.of(context).size.height * 0.8,
+                fit: BoxFit.contain,
               ),
-            ),
-          ],
+              SizedBox(height: 16.0),
+              Text(
+                widget.card.name ?? 'No meaning available',
+                style: TextStyle(fontSize: 16.0, color: Colors.white),
+              ),
+            ],
+          ),
         ),
       ),
     );
