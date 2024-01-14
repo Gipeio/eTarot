@@ -90,8 +90,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
           if (widget.hidden) {
             revealCard();
           } else {
-                      TarotCard drawnCard = widget.deck.removeAt(0);
-            showCardDetails(drawnCard);
+            showCardDetails(widget.card!);
           }
         }
       },
