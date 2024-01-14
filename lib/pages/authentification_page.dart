@@ -1,6 +1,6 @@
 import 'package:etarot/pages/menu_page.dart';
-import 'package:etarot/objects/button_object.dart';
-import 'package:etarot/objects/google_login_button_object.dart';
+import 'package:etarot/widgets/button_widget.dart';
+import 'package:etarot/widgets/google_login_button_widget.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:etarot/test/front_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
