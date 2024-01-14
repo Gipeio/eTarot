@@ -61,13 +61,13 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
           if (widget.deck.isNotEmpty) {
             widget.deck.shuffle();
             TarotCard drawnCard = widget.deck.removeAt(0);
-            print("added " + drawnCard.id + " deck is now: " + widget.deck.length.toString());
+            print("added ${drawnCard.name} deck is now: ${widget.deck.length}");
             // Call the updateCard method from the state
             updateCard(drawnCard);
-          } else {
+          } 
+        } else {
             print(widget.card?.name);
           }
-        }
       },
       child: Container(
         margin: EdgeInsets.all(14.0),
