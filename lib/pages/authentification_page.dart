@@ -32,9 +32,8 @@ class _AuthPageState extends State<AuthPage> {
               child: Text(
                 'Connect With Cards',
                 style: TextStyle(
-                  fontFamily: 'Rocher',
                   fontSize: 40,
-                  color: Style.itemTextColor,
+                  color: Colors.white,
                 ),
               ),
             ),
