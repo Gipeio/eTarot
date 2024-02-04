@@ -29,9 +29,9 @@ class DrawEmplacementObject extends StatefulWidget {
     this.facePosition = 0,
   });
 
-  void revealCard(int faceId) {
+  void revealCard() {
     // Delegating the call to the state's updateCard method
-    _drawEmplacementObjectState.revealCard(faceId);
+    _drawEmplacementObjectState.revealCard();
   }
 
   void addHiddenCard(TarotCard card) {
@@ -54,29 +54,17 @@ class DrawEmplacementObject extends StatefulWidget {
 class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
   Color backgroundColor = Style.backgroundColor;
 
-  void revealCard(int reversed) {
-    if (reversed == 0) { 
-    setState(() {
-      widget.hidden = false;
-      widget.backgroundImage = DecorationImage(
-        image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
-        fit: BoxFit.fill,
-        alignment: Alignment.center,
-      );
-    });
-    }
+  void revealCard() {
+  setState(() {
+    widget.hidden = false;
+    widget.backgroundImage = DecorationImage(
+      image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
+      fit: BoxFit.fill,
+      alignment: Alignment.center,
+    );
+  });
+}
 
-    else {
-      setState(() {
-      widget.hidden = false;
-      widget.backgroundImage = DecorationImage(
-        image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
-        fit: BoxFit.fill,
-        alignment: Alignment.center,
-      );
-    });
-    }
-  }
 
   void addHiddenCard(TarotCard card) {
     setState(() {
@@ -101,40 +89,53 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
   );
 }
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () async {
-        if (!widget.occupied) {
-          widget.deck.shuffle();
-          TarotCard drawnCard = widget.deck.removeAt(0);
-          addHiddenCard(drawnCard);
-          CardFaceService cardFaceService = CardFaceService();
-          List<CardFace> cardFaces = [];
-          CardFace? firstFace = await cardFaceService.getCardFace(widget.card!.faceId);
-          CardFace? secondFace = await cardFaceService.getCardFace(widget.card!.reversedFaceId);
-          cardFaces.add(firstFace!);
-          cardFaces.add(secondFace!);
-          widget.facePosition = Random().nextInt(2);
-          widget.cardFace = cardFaces[widget.facePosition];
+@override
+Widget build(BuildContext context) {
+  return GestureDetector(
+    onTap: () async {
+      if (!widget.occupied) {
+        widget.deck.shuffle();
+        TarotCard drawnCard = widget.deck.removeAt(0);
+        addHiddenCard(drawnCard);
+        CardFaceService cardFaceService = CardFaceService();
+        List<CardFace> cardFaces = [];
+        CardFace? firstFace = await cardFaceService.getCardFace(widget.card!.faceId);
+        CardFace? secondFace = await cardFaceService.getCardFace(widget.card!.reversedFaceId);
+        cardFaces.add(firstFace!);
+        cardFaces.add(secondFace!);
+        widget.facePosition = Random().nextInt(2);
+        widget.cardFace = cardFaces[widget.facePosition];
+      } else {
+        if (widget.hidden) {
+          revealCard();
         } else {
-          if (widget.hidden) {
-            revealCard(widget.facePosition);
-          } else {
-            showCardDetails(widget.card!, widget.cardFace!);
-          }
+          showCardDetails(widget.card!, widget.cardFace!);
         }
-      },
-      child: Container(
-        margin: EdgeInsets.all(14.0),
-        decoration: BoxDecoration(
-          // Use backgroundImage property for setting the background image
-          image: widget.backgroundImage,
-          border: Border.all(color: Style.itemColor),
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        // Your other widget content here
-      ),
-    );
-  }
+      }
+    },
+    child: Container(
+      margin: EdgeInsets.all(14.0),
+      child: (widget.facePosition != 0) ?
+        Transform(
+          alignment: Alignment.center,
+          transform: Matrix4.rotationX(3.14),
+          child: _buildCardContent(),
+        ) : _buildCardContent(),
+    ),
+  );
+}
+
+Widget _buildCardContent() {
+  return Container(
+    decoration: BoxDecoration(
+      // Use backgroundImage property for setting the background image
+      image: widget.backgroundImage,
+      border: Border.all(color: Style.itemColor),
+      borderRadius: BorderRadius.circular(10.0),
+    ),
+    // Your other widget content here
+  );
+}
+
+
 }
