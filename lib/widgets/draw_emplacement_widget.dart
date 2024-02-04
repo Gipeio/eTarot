@@ -68,6 +68,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
 
     else {
       setState(() {
+      widget.hidden = false;
       widget.backgroundImage = DecorationImage(
         image: AssetImage('assets/cards/${widget.card?.id}.jpg'),
         fit: BoxFit.fill,

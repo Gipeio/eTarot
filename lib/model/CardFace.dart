@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 class CardFace {
   final String id;
   final String meaning;
-  final int note;
+  final double note;
 
   CardFace({
     required this.id,
@@ -19,7 +21,7 @@ class CardFace {
     return CardFace(
       id: id,
       meaning: json?['meaning'] ?? '',
-      note: json?['note'] ?? 0,
+      note: (json?['note'] ?? 0).toDouble(),
     );
   }
 }
