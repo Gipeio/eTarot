@@ -1,12 +1,10 @@
 import 'package:etarot/model/Card.dart';
-import 'package:etarot/model/CardFace.dart';
 import 'package:flutter/material.dart';
 
 class CardDetailWidget extends StatefulWidget {
   final TarotCard card;
-  final CardFace cardFace;
 
-  CardDetailWidget({required this.card, required this.cardFace});
+  CardDetailWidget({required this.card});
 
   @override
   _CardDetailWidgetState createState() => _CardDetailWidgetState();
@@ -37,7 +35,7 @@ class _CardDetailWidgetState extends State<CardDetailWidget> {
                 ),
                 SizedBox(height: 16.0),
                 Text(
-                  widget.cardFace.meaning ?? 'No meaning available',
+                  widget.card.name ?? 'No meaning available',
                   style: TextStyle(fontSize: 16.0, color: Colors.white),
                 ),
               ],
