@@ -1,5 +1,5 @@
 import 'package:etarot/model/Card.dart';
-import 'package:etarot/objects/card_detail_widget.dart';
+import 'package:etarot/widgets/card_detail_widget.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
 
