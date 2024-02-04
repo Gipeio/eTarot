@@ -1,6 +1,6 @@
 import 'package:etarot/model/Card.dart';
-import 'package:etarot/widgets/button_widget.dart';
-import 'package:etarot/widgets/draw_emplacement_widget.dart';
+import 'package:etarot/objects/button_object.dart';
+import 'package:etarot/objects/draw_emplacement_object.dart';
 import 'package:etarot/services/card_service.dart';
 import 'package:etarot/styling/style.dart';
 import 'package:flutter/material.dart';
