@@ -34,7 +34,7 @@ class CustomButtonObject extends StatelessWidget {
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.w500,
-            color: disabled ? Colors.white54 : Style.itemTextColor, // Use a lighter color when disabled
+            color: disabled ? Colors.white54 : Colors.white, // Use a lighter color when disabled
           ),
         ),
       ),
