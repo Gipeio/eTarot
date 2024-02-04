@@ -23,9 +23,8 @@ class MenuPage extends StatelessWidget {
             Text(
               'Current User: $currentUser',
               style: const TextStyle(
-                fontFamily: 'Rocher',
                 fontSize: 40,
-                color: Style.itemTextColor,
+                color: Colors.white,
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.20),
