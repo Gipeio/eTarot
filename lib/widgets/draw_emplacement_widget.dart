@@ -83,7 +83,7 @@ class _DrawEmplacementObjectState extends State<DrawEmplacementObject> {
     PageRouteBuilder(
       opaque: false,
       pageBuilder: (BuildContext context, _, __) {
-        return CardDetailWidget(card: card, cardFace: cardFace);
+        return CardDetailWidget(card: card, cardFace: cardFace,reversed: widget.facePosition,);
       },
     ),
   );
