@@ -28,10 +28,8 @@ class MenuPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: MediaQuery.of(context).size.height * 0.20),
-            CustomButtonObject(label: 'Tutorial', onPressed: () => _navigateToPage(context, 'Tutorial')),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             CustomButtonObject(label: 'Draw', onPressed: () => _navigateToPage(context, 'Draw')),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+            SizedBox(height: MediaQuery.of(context).size.height * 0.1),
 SizedBox(
   child: currentUser != 'Guest'
       ? CustomButtonObject(
